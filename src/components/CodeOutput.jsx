@@ -29,44 +29,45 @@ function CodeOutput({ designCode, testbenchCode }) {
   };
 
   return (
-    <div className="mt-6 bg-white rounded-lg shadow">
-      <div className="flex justify-between items-center border-b p-2">
-        <div className="flex">
+    <div className="bg-[#1C1C1C] rounded-2xl shadow-2xl border border-[#2D2D2D] overflow-hidden">
+      <div className="flex justify-between items-center p-4 border-b border-[#2D2D2D]">
+        <div className="flex space-x-2">
           <button
-            className={`px-4 py-2 rounded-t-lg ${
+            className={`px-4 py-2 rounded-lg transition-all duration-200 font-medium ${
               activeTab === 'design'
-                ? 'text-blue-600 border-b-2 border-blue-600'
-                : 'text-gray-600'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-400 hover:text-white hover:bg-[#2D2D2D]'
             }`}
             onClick={() => setActiveTab('design')}
           >
             Design Module
           </button>
           <button
-            className={`px-4 py-2 rounded-t-lg ${
+            className={`px-4 py-2 rounded-lg transition-all duration-200 font-medium ${
               activeTab === 'testbench'
-                ? 'text-blue-600 border-b-2 border-blue-600'
-                : 'text-gray-600'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-400 hover:text-white hover:bg-[#2D2D2D]'
             }`}
             onClick={() => setActiveTab('testbench')}
           >
             Testbench
           </button>
         </div>
-        <div className="flex gap-2">
+        <div className="flex space-x-2">
           <button
             onClick={() => setIsEditing(!isEditing)}
-            className={`px-3 py-1 text-sm rounded ${
-              isEditing
-                ? 'bg-yellow-500 hover:bg-yellow-600'
-                : 'bg-blue-500 hover:bg-blue-600'
-            } text-white`}
+            className={`px-4 py-2 rounded-lg transition-all duration-200 font-medium
+              ${isEditing 
+                ? 'bg-yellow-600 hover:bg-yellow-700 text-white' 
+                : 'bg-[#2D2D2D] text-gray-400 hover:text-white'
+              }`}
           >
             {isEditing ? 'View Mode' : 'Edit Mode'}
           </button>
           <button
             onClick={handleDownload}
-            className="px-3 py-1 text-sm bg-green-600 text-white rounded hover:bg-green-700"
+            className="px-4 py-2 bg-emerald-600 text-white rounded-lg font-medium 
+              hover:bg-emerald-700 transition-all duration-200"
           >
             Download
           </button>
@@ -78,6 +79,14 @@ function CodeOutput({ designCode, testbenchCode }) {
           code={activeTab === 'design' ? editedDesignCode : editedTestbenchCode}
           onChange={isEditing ? handleCodeChange : undefined}
           readOnly={!isEditing}
+          theme="vs-dark"
+          options={{
+            fontSize: 14,
+            padding: { top: 16, bottom: 16 },
+            minimap: { enabled: false },
+            scrollBeyondLastLine: false,
+            lineHeight: 1.6,
+          }}
         />
       </div>
     </div>
